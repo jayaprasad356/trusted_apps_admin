@@ -85,35 +85,20 @@ if (!empty($res_check_user)) {
     return false;
 }
 
-$sql = "SELECT * FROM users WHERE id=" . $user_id;
+$sql = "INSERT INTO ratings (user_id, app_id,ratings,comments) VALUES ('$user_id','$app_id',$ratings,'$comments')";
 $db->sql($sql);
-$res = $db->getResult();
-$num = $db->numRows($res);
-if ($num == 1) {
-
-    $sql = "INSERT INTO ratings (user_id, app_id) VALUES ('$user_id','$app_id')";
-    $db->sql($sql);
-
-    $sql = "UPDATE users SET user_ratings='$ratings',comments='$comments'  WHERE id=" . $user_id;
-    $db->sql($sql);
 
 
-    $sql = "SELECT * FROM ratings SET  WHERE app_id = $app_id";
-    $db->sql($sql);
-    $res = $db->getResult();
+// $sql = "SELECT * FROM ratings SET  WHERE app_id = $app_id";
+// $db->sql($sql);
+// $res = $db->getResult();
 
-    $sql = "UPDATE apps SET rate_count = $rate_count + 1 , ratings = '$avg_ratings' WHERE id=" . $app_id;
-    $db->sql($sql);
+// $sql = "UPDATE apps SET rate_count = $rate_count + 1 , ratings = '$avg_ratings' WHERE id=" . $app_id;
+// $db->sql($sql);
 
-    $response['success'] = true;
-    $response['message'] = "Updated Successfully";
-    print_r(json_encode($response));
-    return false;   
-}
-else {
-    $response['success'] = false;
-    $response['message'] ="Not Updated";
-    print_r(json_encode($response));
-    return false;
-}
+$response['success'] = true;
+$response['message'] = "Rated Successfully";
+print_r(json_encode($response));
+return false;   
+
 ?>
