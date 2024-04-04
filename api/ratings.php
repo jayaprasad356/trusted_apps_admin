@@ -87,8 +87,6 @@ else{
     $db->sql($sql);
 }
 
-
-
 // $sql = "SELECT * FROM ratings SET  WHERE app_id = $app_id";
 // $db->sql($sql);
 // $res = $db->getResult();
