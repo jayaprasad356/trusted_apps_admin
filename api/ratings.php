@@ -79,14 +79,14 @@ $db->sql($sql_check);
 $res_check_user = $db->getResult();
 
 if (!empty($res_check_user)) {
-    $response['success'] = false;
-    $response['message'] = "User Already Give their Ratings For this App";
-    print_r(json_encode($response));
-    return false;
+    $sql = "UPDATE ratings SET ratings = $ratings,comments = '$comments' WHERE user_id = $user_id AND app_id = $app_id";
+    $db->sql($sql);
+}
+else{
+    $sql = "INSERT INTO ratings (user_id, app_id,ratings,comments) VALUES ('$user_id','$app_id',$ratings,'$comments')";
+    $db->sql($sql);
 }
 
-$sql = "INSERT INTO ratings (user_id, app_id,ratings,comments) VALUES ('$user_id','$app_id',$ratings,'$comments')";
-$db->sql($sql);
 
 
 // $sql = "SELECT * FROM ratings SET  WHERE app_id = $app_id";
