@@ -16,7 +16,7 @@ $sql = "SELECT r.id, r.user_id, u.name AS name, u.mobile AS mobile, u.profile AS
         FROM ratings r
         INNER JOIN users u ON r.user_id = u.id
         INNER JOIN apps a ON r.app_id = a.id
-        ORDER BY r.id DESC
+        ORDER BY r.datetime DESC
         LIMIT 25";
 
 $db->sql($sql);
