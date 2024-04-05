@@ -72,7 +72,7 @@ $db->connect();
         
                 if (isset($_GET['search']) && !empty($_GET['search'])) {
                     $search = $db->escapeString($_GET['search']);
-                    $where .= " AND (id LIKE '%" . $search . "%' OR name LIKE '%" . $search . "%' OR mobile LIKE '%" . $search . "%' OR refer_code LIKE '%" . $search . "%')";
+                    $where .= " AND (id LIKE '%" . $search . "%' OR name LIKE '%" . $search . "%' OR mobile LIKE '%" . $search . "%' OR email LIKE '%" . $search . "%')";
                 }
             if (isset($_GET['sort'])){
                 $sort = $db->escapeString($_GET['sort']);
@@ -104,29 +104,12 @@ $db->connect();
                 $tempRow['name'] = $row['name'];
                 $tempRow['mobile'] = $row['mobile'];
                 $tempRow['email'] = $row['email'];
-                $tempRow['referred_by'] = $row['referred_by'];
-                $tempRow['refer_code'] = $row['refer_code'];
-                $tempRow['account_num'] = $row['account_num'];
-                $tempRow['holder_name'] = $row['holder_name'];
-                $tempRow['bank'] = $row['bank'];
-                $tempRow['branch'] = $row['branch'];
-                $tempRow['ifsc'] = $row['ifsc'];
-                $tempRow['age'] = $row['age'];
-                $tempRow['city'] = $row['city'];
-                $tempRow['state'] = $row['state'];
-                $tempRow['device_id'] = $row['device_id'];
-                $tempRow['today_income'] = $row['today_income'];
-                $tempRow['total_income'] = $row['total_income'];
-                $tempRow['balance'] = $row['balance'];
-                $tempRow['withdrawal_status'] = $row['withdrawal_status'];
-                $tempRow['recharge'] = $row['recharge'];
-                $tempRow['total_recharge'] = $row['total_recharge'];
-                $tempRow['team_size'] = $row['team_size'];
-                $tempRow['valid_team'] = $row['valid_team'];
-                $tempRow['total_assets'] = $row['total_assets'];
-                $tempRow['total_withdrawal'] = $row['total_withdrawal'];
-                $tempRow['team_income'] = $row['team_income'];
                 $tempRow['registered_datetime'] = $row['registered_datetime'];
+                if (!empty($row['profile'])) {
+                    $tempRow['profile'] = "<a data-lightbox='category' href='" . $row['profile'] . "' data-caption='" . $row['profile'] . "'><img src='" . $row['profile'] . "' title='" . $row['profile'] . "' height='50' /></a>";
+                } else {
+                    $tempRow['profile'] = 'No profile';
+                }
                 $tempRow['operate'] = $operate;
                 $rows[] = $tempRow;
             }
@@ -1015,6 +998,9 @@ if (isset($_GET['table']) && $_GET['table'] == 'ratings') {
         $tempRow['user_name'] = $row['user_name'];
         $tempRow['user_mobile'] = $row['user_mobile'];
         $tempRow['app_name'] = $row['app_name'];
+        $tempRow['ratings'] = $row['ratings'];
+        $tempRow['comments'] = $row['comments'];
+        $tempRow['datetime'] = $row['datetime'];
         $tempRow['operate'] = $operate;
         $rows[] = $tempRow;
     }

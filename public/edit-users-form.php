@@ -19,28 +19,6 @@ if (isset($_POST['btnEdit'])) {
     $name = $db->escapeString($_POST['name']);
     $mobile = $db->escapeString($_POST['mobile']);
     $email= $db->escapeString($_POST['email']);
-    $refer_code= $db->escapeString($_POST['refer_code']);
-    $referred_by= $db->escapeString($_POST['referred_by']);
-    $account_num = $db->escapeString($_POST['account_num']);
-    $holder_name = $db->escapeString($_POST['holder_name']);
-    $bank = $db->escapeString($_POST['bank']);
-    $branch = $db->escapeString(($_POST['branch']));
-    $ifsc = $db->escapeString(($_POST['ifsc']));
-    $age = $db->escapeString(($_POST['age']));
-    $city = $db->escapeString(($_POST['city']));
-    $state = $db->escapeString(($_POST['state']));
-    $device_id = $db->escapeString($_POST['device_id']);
-    $today_income = $db->escapeString(($_POST['today_income']));
-    $total_income = $db->escapeString(($_POST['total_income']));
-    $balance = $db->escapeString(($_POST['balance']));
-    $withdrawal_status = $db->escapeString(($_POST['withdrawal_status']));
-    $recharge = $db->escapeString(($_POST['recharge']));
-    $total_recharge = $db->escapeString($_POST['total_recharge']);
-    $team_size = $db->escapeString($_POST['team_size']);
-    $valid_team = $db->escapeString($_POST['valid_team']);
-    $total_assets = $db->escapeString($_POST['total_assets']);
-    $total_withdrawal = $db->escapeString($_POST['total_withdrawal']);
-    $team_income= $db->escapeString($_POST['team_income']);
     $registered_datetime= $db->escapeString($_POST['registered_datetime']);
 
     $error = array();
@@ -48,41 +26,58 @@ if (isset($_POST['btnEdit'])) {
     if (empty($name)) {
         $error['name'] = " <span class='label label-danger'>Required!</span>";
     }
-    if (empty($age)) {
-        $error['age'] = " <span class='label label-danger'>Required!</span>";
-    }
-    if (empty($city)) {
-        $error['city'] = " <span class='label label-danger'>Required!</span>";
-    }
     if (empty($email)) {
         $error['email'] = " <span class='label label-danger'>Required!</span>";
     }
-    if (empty($state)) {
-        $error['state'] = " <span class='label label-danger'>Required!</span>";
+   
+    $sql_query = "UPDATE users SET name='$name',mobile='$mobile',email='$email',registered_datetime='$registered_datetime' WHERE id =  $ID";
+    $db->sql($sql_query);
+    $result = $db->getResult();             
+    if (!empty($result)) {
+        $error['update_users'] = " <span class='label label-danger'>Failed</span>";
+    } else {
+        $error['update_users'] = " <span class='label label-success'>Users Updated Successfully</span>";
     }
+    if ($_FILES['profile']['size'] != 0 && $_FILES['profile']['error'] == 0 && !empty($_FILES['profile'])) {
+        //image isn't empty and update the image
+        $old_image = $db->escapeString($_POST['old_image']);
+        $extension = pathinfo($_FILES["profile"]["name"])['extension'];
 
-    
-            $sql_query = "UPDATE users SET name='$name',mobile = '$mobile',email='$email',age='$age',city='$city',referred_by='$referred_by',refer_code='$refer_code',holder_name='$holder_name', bank='$bank', branch='$branch', ifsc='$ifsc', account_num='$account_num',withdrawal_status = '$withdrawal_status',recharge  = '$recharge ',balance = '$balance',today_income = '$today_income',device_id  = '$device_id',total_income  = '$total_income',state  = '$state',total_recharge  = '$total_recharge',team_size  = '$team_size',valid_team  = '$valid_team',total_assets  = '$total_assets',total_withdrawal  = '$total_withdrawal',team_income  = '$team_income',registered_datetime  = '$registered_datetime' WHERE id = $ID";
-            $db->sql($sql_query);
-            $update_result = $db->getResult();
-    
-            if (!empty($update_result)) {
-                $update_result = 0;
-            } else {
-                $update_result = 1;
-            }
-    
-            // check update result
-            if ($update_result == 1) {
-                $error['update_users'] = " <section class='content-header'><span class='label label-success'>User Details updated Successfully</span></section>";
-            } else {
-                $error['update_users'] = " <span class='label label-danger'>Failed to update</span>";
-            }
+        $result = $fn->validate_image($_FILES["profile"]);
+        $target_path = 'upload/images/';
+        
+        $filename = microtime(true) . '.' . strtolower($extension);
+        $full_path = $target_path . "" . $filename;
+        if (!move_uploaded_file($_FILES["profile"]["tmp_name"], $full_path)) {
+            echo '<p class="alert alert-danger">Can not upload image.</p>';
+            return false;
+            exit();
         }
-    
+        if (!empty($old_image) && file_exists($old_image)) {
+            unlink($old_image);
+        }
+
+        $upload_image = 'upload/images/' . $filename;
+        $sql = "UPDATE users SET `profile`='$upload_image' WHERE `id`='$ID'";
+        $db->sql($sql);
+
+        $update_result = $db->getResult();
+        if (!empty($update_result)) {
+            $update_result = 0;
+        } else {
+            $update_result = 1;
+        }
+
+        if ($update_result == 1) {
+            $error['update_users'] = " <section class='content-header'><span class='label label-success'>Users updated Successfully</span></section>";
+        } else {
+            $error['update_users'] = " <span class='label label-danger'>Failed to update</span>";
+        }
+    }
+}
 
 
- 
+// create array variable to store previous data
 $data = array();
 
 
@@ -105,160 +100,49 @@ if (isset($_POST['btnCancel'])) { ?>
     </ol>
 </section>
 <section class="content">
-    <!-- Main row -->
+	<!-- Main row -->
 
-    <div class="row">
-        <div class="col-md-11">
+	<div class="row">
+		<div class="col-md-10">
 
-        <div class="box box-primary">
-               <div class="box-header with-border">
-                           <div class="form-group col-md-3">
-                                <h4 class="box-title"> </h4>
-                                <a class="btn btn-block btn-primary" href="add-recharge.php?id=<?php echo $ID ?>"><i class="fa fa-plus-square"></i> Add Recharge</a>
-                            </div>
-                </div>
-                <!-- /.box-header -->
-                <form id="edit_project_form" method="post" enctype="multipart/form-data">
-                <div class="box-body">
-                        <div class="row">
-                              <div class="form-group">
-                              <div class="col-md-3">
+			<!-- general form elements -->
+			<div class="box box-primary">
+				<div class="box-header with-border">
+				</div><!-- /.box-header -->
+				<!-- form start -->
+				<form id="edit_languages_form" method="post" enctype="multipart/form-data">
+					<div class="box-body">
+					<div class="box-body">
+                    <input type="hidden" name="old_image" value="<?php echo isset($res[0]['profile']) ? $res[0]['profile'] : ''; ?>">
+				    	<div class="row">
+					  	  <div class="form-group">
+                              <div class="col-md-4">
                                     <label for="exampleInputEmail1">Name</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
                                     <input type="text" class="form-control" name="name" value="<?php echo $res[0]['name']; ?>">
                                 </div>
-                                <div class="col-md-3">
-                                    <label for="exampleInputEmail1">Email</label> <i class="text-danger asterik">*</i><?php echo isset($error['email']) ? $error['email'] : ''; ?>
-                                    <input type="email" class="form-control" name="email" value="<?php echo $res[0]['email']; ?>">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="exampleInputEmail1">Age</label> <i class="text-danger asterik">*</i><?php echo isset($error['age']) ? $error['age'] : ''; ?>
-                                    <input type="number" class="form-control" name="age" value="<?php echo $res[0]['age']; ?>">
-                                </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="exampleInputEmail1">Mobile</label> <i class="text-danger asterik">*</i><?php echo isset($error['mobile']) ? $error['mobile'] : ''; ?>
                                     <input type="number" class="form-control" name="mobile" value="<?php echo $res[0]['mobile']; ?>">
                                 </div>
-                               </div>
-                             </div>
-                          <br>
-                          <div class="row">
-                              <div class="form-group">
-                              <div class="col-md-3">
-                                    <label for="exampleInputEmail1">State</label> <i class="text-danger asterik">*</i><?php echo isset($error['state']) ? $error['state'] : ''; ?>
-                                    <input type="text" class="form-control" name="state" value="<?php echo $res[0]['state']; ?>">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="exampleInputEmail1">City</label> <i class="text-danger asterik">*</i><?php echo isset($error['city']) ? $error['city'] : ''; ?>
-                                    <input type="text" class="form-control" name="city" value="<?php echo $res[0]['city']; ?>">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="exampleInputEmail1"> Refered By</label> <i class="text-danger asterik">*</i<?php echo isset ($error['referred_by']) ? $error['referred_by'] : ''; ?>>
-                                    <input type="text" class="form-control" name="referred_by" value="<?php echo $res[0]['referred_by']; ?>">
-                                 </div>  
-                                 <div class="col-md-3">
-                                    <label for="exampleInputEmail1"> Refer Code</label> <i class="text-danger asterik">*</i><?php echo isset($error['refer_code']) ? $error['refer_code'] : ''; ?>
-                                    <input type="text" class="form-control" name="refer_code" value="<?php echo $res[0]['refer_code']; ?>">
+                                <div class="col-md-4">
+                                    <label for="exampleInputEmail1">Email</label> <i class="text-danger asterik">*</i><?php echo isset($error['email']) ? $error['email'] : ''; ?>
+                                    <input type="email" class="form-control" name="email" value="<?php echo $res[0]['email']; ?>">
                                 </div>
                                </div>
                              </div>
-                             <br>
-                             <div class="row">
-                            <div class="form-group">
-                            <div class='col-md-6'>
-                                    <label for="exampleInputEmail1">Account Number</label> <i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="account_num" value="<?php echo $res[0]['account_num']; ?>">
-                                </div>
-                                <div class='col-md-6'>
-                                    <label for="exampleInputEmail1">Holder Name</label> <i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="holder_name" value="<?php echo $res[0]['holder_name']; ?>">
-                                </div>
-                            </div>
-                        </div>
                         <br>
                         <div class="row">
-                            <div class="form-group">
                                 <div class="col-md-4">
-                                    <label for="exampleInputEmail1">IFSC</label><i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="ifsc" value="<?php echo $res[0]['ifsc']; ?>">
-                                </div>
-                                <div class="col-md-4">
-                                <label for="exampleInputEmail1">Bank</label><i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="bank" value="<?php echo $res[0]['bank']; ?>">
+                                    <label for="exampleInputFile">Profile</label> <i class="text-danger asterik">*</i><?php echo isset($error['profile']) ? $error['profile'] : ''; ?>
+                                    <input type="file" name="profile" onchange="readURL(this);" accept="image/png, image/jpeg" id="image" /><br>
+                                    <img id="blah" src="<?php echo $res[0]['profile']; ?>" alt="" width="150" height="200" <?php echo empty($res[0]['profile']) ? 'style="display: none;"' : ''; ?> />
                                 </div>
                                 <div class="col-md-4">
-                                <label for="exampleInputEmail1">Branch</label><i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="branch" value="<?php echo $res[0]['branch']; ?>">
-                                </div>
-                               
-                                </div>
-                            </div>
-                            <br>
-                    <div class="row">
-                          <div class="form-group">
-                            <div class='col-md-3'>
-                              <label for="">Withdrawal Status</label><br>
-                                    <input type="checkbox" id="withdrawal_button" class="js-switch" <?= isset($res[0]['withdrawal_status']) && $res[0]['withdrawal_status'] == 1 ? 'checked' : '' ?>>
-                                    <input type="hidden" id="withdrawal_status" name="withdrawal_status" value="<?= isset($res[0]['withdrawal_status']) && $res[0]['withdrawal_status'] == 1 ? 1 : 0 ?>">
-                                </div>
-                                <div class="col-md-3">
-                                <label for="exampleInputEmail1">Recharge </label><i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="recharge" value="<?php echo $res[0]['recharge']; ?>">
-                                </div>
-                                <div class="col-md-3">
-                                <label for="exampleInputEmail1">Balance</label><i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="balance" value="<?php echo $res[0]['balance']; ?>">
-                                </div>
-                                <div class="col-md-3">
-                                <label for="exampleInputEmail1">Total Recharge</label><i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="total_recharge" value="<?php echo $res[0]['total_recharge']; ?>">
-                                </div>
-                           </div>
-                     </div>
-                     <br>
-                     <div class="row">
-                            <div class="col-md-3">
-                                <label for="exampleInputEmail1">Total Income</label><i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="total_income" value="<?php echo $res[0]['total_income']; ?>">
-                                </div>
-                                <div class="col-md-3">
-                                <label for="exampleInputEmail1">Today Income</label><i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="today_income" value="<?php echo $res[0]['today_income']; ?>">
-                                </div>
-                                <div class="col-md-3">
-                                <label for="exampleInputEmail1">Device ID</label><i class="text-danger asterik">*</i>
-                                    <input type="text" class="form-control" name="device_id" value="<?php echo $res[0]['device_id']; ?>">
-                                </div>
-                                <div class="col-md-3">
-                                <label for="exampleInputEmail1">Team Size</label><i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="team_size" value="<?php echo $res[0]['team_size']; ?>">
-                                </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label for="exampleInputEmail1">Valid Team</label><i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="valid_team" value="<?php echo $res[0]['valid_team']; ?>">
-                                </div>
-                                <div class="col-md-3">
-                                <label for="exampleInputEmail1">Total Assets</label><i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="total_assets" value="<?php echo $res[0]['total_assets']; ?>">
-                                </div>
-                                <div class="col-md-3">
-                                <label for="exampleInputEmail1">Total Withdrawals</label><i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="total_withdrawal" value="<?php echo $res[0]['total_withdrawal']; ?>">
-                                </div>
-                                <div class="col-md-3">
-                                <label for="exampleInputEmail1">Team Income</label><i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="team_income" value="<?php echo $res[0]['team_income']; ?>">
-                                </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-3">
                                 <label for="exampleInputEmail1">Registered Datetime</label><i class="text-danger asterik">*</i>
                                     <input type="datetime-local" class="form-control" name="registered_datetime" value="<?php echo $res[0]['registered_datetime']; ?>">
                                 </div>
                         </div>
+                        <br>
                         <div class="box-footer">
                         <button type="submit" class="btn btn-primary" name="btnEdit">Update</button>
                     </div>
@@ -286,3 +170,20 @@ if (isset($_POST['btnCancel'])) { ?>
     };
 </script>
 
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(200)
+                    .css('display', 'block');
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
