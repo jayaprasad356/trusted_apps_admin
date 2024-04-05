@@ -166,13 +166,13 @@ $fn = new custom_functions;
                     </a>
                 </li>
               
-               <!-- <li class="treeview">
+                <li class="treeview">
                     <a href="users.php">
                     <i class="fa fa-users"></i>
                         <span>Users</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <!--<li class="treeview">
                     <a href="#">
                         <i class="fa fa-money"></i>
                         <span>Withdrawals</span>
