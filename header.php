@@ -172,83 +172,6 @@ $fn = new custom_functions;
                         <span>Users</span>
                     </a>
                 </li>
-                <!--<li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-money"></i>
-                        <span>Withdrawals</span>
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="withdrawals.php"><i class="fa fa-money"></i>Withdrawals</a></li>
-                        <li><a href="add-new-bulk-cancel.php"><i class="fa fa-money"></i>Bulk Cancel</a></li>
-                   </ul>
-                </li>
-                <li class="treeview">
-                    <a href="transaction.php">
-                        <i class="fa fa-credit-card"></i>
-                        <span>Transaction</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-calendar"></i>
-                        <span>Plans</span>
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="plan.php"><i class="fa fa-calendar"></i>Plan</a></li>
-                        <li><a href="user_plan.php"><i class="fa fa-user"></i>User Plan</a></li>
-                        <li><a href="plan_slides.php"><i class="fa fa-image"></i>Plan Slides</a></li>
-                   </ul>
-                </li>
-                <li class="treeview">
-                    <a href="settings.php">
-                        <i class="fa fa-gear"></i>
-                        <span>Setting</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="app-update.php">
-                        <i class="fa fa-bullseye"></i>
-                        <span>App Update</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="recharge.php">
-                        <i class="fa fa-money"></i>
-                        <span>Recharge</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="home_slides.php">
-                        <i class="fa fa-image"></i>
-                        <span>Home Slide</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="explore.php">
-                        <i class="fa fa-adn"></i>
-                        <span>Explore</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="payment_setting.php">
-                        <i class="fa fa-image"></i>
-                        <span>Payment Setting</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="otp.php">
-                        <i class="fa fa-lock"></i>
-                        <span>OTP</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="hour-withdrawal-reports.php">
-                        <i class="fa fa-adn"></i>
-                        <span>Hour Withdrawal Reports</span>
-                    </a>
-                </li>-->
                 <li class="treeview">
                     <a href="apps.php">
                         <i class="fa fa-adn"></i>
@@ -261,7 +184,7 @@ $fn = new custom_functions;
                         <span>Ratings</span>
                     </a>
                 </li>
-            </section>
+                </section>
             <!-- /.sidebar -->
         </aside>
 </body>
