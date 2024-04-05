@@ -102,7 +102,6 @@ $db->connect();
                 $operate .= ' <a class="text text-danger" href="delete-users.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
                 $tempRow['id'] = $row['id'];
                 $tempRow['name'] = $row['name'];
-                $tempRow['mobile'] = $row['mobile'];
                 $tempRow['email'] = $row['email'];
                 $tempRow['registered_datetime'] = $row['registered_datetime'];
                 if (!empty($row['profile'])) {
@@ -996,7 +995,6 @@ if (isset($_GET['table']) && $_GET['table'] == 'ratings') {
         $operate = ' <a class="text text-danger" href="delete-ratings.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
         $tempRow['id'] = $row['id'];
         $tempRow['user_name'] = $row['user_name'];
-        $tempRow['user_mobile'] = $row['user_mobile'];
         $tempRow['app_name'] = $row['app_name'];
         $tempRow['ratings'] = $row['ratings'];
         $tempRow['comments'] = $row['comments'];

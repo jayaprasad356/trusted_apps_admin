@@ -17,7 +17,6 @@ if (isset($_GET['id'])) {
 if (isset($_POST['btnEdit'])) {
 
     $name = $db->escapeString($_POST['name']);
-    $mobile = $db->escapeString($_POST['mobile']);
     $email= $db->escapeString($_POST['email']);
     $registered_datetime= $db->escapeString($_POST['registered_datetime']);
 
@@ -30,7 +29,7 @@ if (isset($_POST['btnEdit'])) {
         $error['email'] = " <span class='label label-danger'>Required!</span>";
     }
    
-    $sql_query = "UPDATE users SET name='$name',mobile='$mobile',email='$email',registered_datetime='$registered_datetime' WHERE id =  $ID";
+    $sql_query = "UPDATE users SET name='$name',email='$email',registered_datetime='$registered_datetime' WHERE id =  $ID";
     $db->sql($sql_query);
     $result = $db->getResult();             
     if (!empty($result)) {
@@ -119,10 +118,6 @@ if (isset($_POST['btnCancel'])) { ?>
                               <div class="col-md-4">
                                     <label for="exampleInputEmail1">Name</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
                                     <input type="text" class="form-control" name="name" value="<?php echo $res[0]['name']; ?>">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="exampleInputEmail1">Mobile</label> <i class="text-danger asterik">*</i><?php echo isset($error['mobile']) ? $error['mobile'] : ''; ?>
-                                    <input type="number" class="form-control" name="mobile" value="<?php echo $res[0]['mobile']; ?>">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="exampleInputEmail1">Email</label> <i class="text-danger asterik">*</i><?php echo isset($error['email']) ? $error['email'] : ''; ?>

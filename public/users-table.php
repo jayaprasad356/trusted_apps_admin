@@ -22,7 +22,6 @@
                                     <th  data-field="operate" data-events="actionEvents">Action</th>
                                     <th  data-field="id" data-sortable="true">ID</th>
                                     <th  data-field="name" data-sortable="true">Name</th>
-                                    <th  data-field="mobile" data-sortable="true">Mobile</th>
                                     <th  data-field="email" data-sortable="true">Email</th>
                                     <th data-field="registered_datetime" data-sortable="true">Registered Datetime</th>
                                     <th data-field="profile">Profile</th>

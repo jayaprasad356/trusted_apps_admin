@@ -37,7 +37,6 @@
                                     
                                     <th  data-field="id" data-sortable="true">ID</th>
                                     <th data-field="user_name" data-sortable="true">User Name</th>
-                                    <th data-field="user_mobile" data-sortable="true">User Mobile</th>
                                     <th data-field="app_name" data-sortable="true">App Name</th>
                                     <th data-field="ratings" data-sortable="true">Ratings</th>
                                     <th data-field="comments" data-sortable="true">Comments</th>
