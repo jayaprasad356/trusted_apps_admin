@@ -172,12 +172,6 @@ $fn = new custom_functions;
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="users.php">
-                    <i class="fa fa-users"></i>
-                        <span>Users</span>
-                    </a>
-                </li>
-                <li class="treeview">
                     <a href="apps.php">
                         <i class="fa fa-adn"></i>
                         <span>Apps</span>
