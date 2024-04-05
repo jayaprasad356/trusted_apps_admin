@@ -74,6 +74,7 @@ if (empty($apps)) {
 $rate_count = $apps[0]['rate_count'];
 
 
+
 $sql_check = "SELECT * FROM ratings WHERE user_id = $user_id AND app_id = $app_id";
 $db->sql($sql_check);
 $res_check_user = $db->getResult();
@@ -91,7 +92,13 @@ else{
     $sql = "UPDATE apps SET rate_count = $rate_count + 1 WHERE id=" . $app_id;
     $db->sql($sql);
 }
+$sql_check = "SELECT AVG(ratings) AS ratings FROM `ratings` WHERE app_id = $app_id";
+$db->sql($sql_check);
+$rate = $db->getResult();
 
+$ratings = $rate[0]['ratings'];
+$sql = "UPDATE apps SET ratings = $ratings WHERE id=" . $app_id;
+$db->sql($sql);
 // $sql = "SELECT * FROM ratings SET  WHERE app_id = $app_id";
 // $db->sql($sql);
 // $res = $db->getResult();
