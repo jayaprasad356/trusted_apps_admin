@@ -978,7 +978,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'ratings') {
             $total = $row['total'];
         }
         
-        $sql = "SELECT l.id AS id, l.*, u.name AS user_name, u.mobile AS user_mobile, a.name AS app_name FROM `ratings` l " . $join . " ORDER BY $sort $order LIMIT $offset, $limit";
+        $sql = "SELECT l.id AS id, l.*, u.name AS user_name,a.name AS app_name FROM `ratings` l " . $join . " ORDER BY $sort $order LIMIT $offset, $limit";
         $db->sql($sql);
         $res = $db->getResult();
         
