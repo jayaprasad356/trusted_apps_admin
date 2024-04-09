@@ -18,6 +18,15 @@ if (isset($_POST['btnEdit'])) {
 
     $name = $db->escapeString($_POST['name']);
     $email= $db->escapeString($_POST['email']);
+    $min_withdrawal = $db->escapeString($_POST['min_withdrawal']);
+    $total_withdrawal= $db->escapeString($_POST['total_withdrawal']);
+    $balance = $db->escapeString($_POST['balance']);
+    $total_earnings= $db->escapeString($_POST['total_earnings']);
+    $account_num = $db->escapeString(($_POST['account_num']));
+    $holder_name = $db->escapeString(($_POST['holder_name']));
+    $bank = $db->escapeString(($_POST['bank']));
+    $branch = $db->escapeString(($_POST['branch']));
+    $ifsc = $db->escapeString(($_POST['ifsc']));
     $registered_datetime= $db->escapeString($_POST['registered_datetime']);
 
     $error = array();
@@ -29,7 +38,7 @@ if (isset($_POST['btnEdit'])) {
         $error['email'] = " <span class='label label-danger'>Required!</span>";
     }
    
-    $sql_query = "UPDATE users SET name='$name',email='$email',registered_datetime='$registered_datetime' WHERE id =  $ID";
+    $sql_query = "UPDATE users SET name='$name',email='$email',registered_datetime='$registered_datetime',total_earnings='$total_earnings',balance='$balance',total_withdrawal='$total_withdrawal',min_withdrawal='$min_withdrawal',account_num='$account_num', holder_name='$holder_name', bank='$bank', branch='$branch', ifsc='$ifsc' WHERE id =  $ID";
     $db->sql($sql_query);
     $result = $db->getResult();             
     if (!empty($result)) {
@@ -136,6 +145,57 @@ if (isset($_POST['btnCancel'])) { ?>
                                 <label for="exampleInputEmail1">Registered Datetime</label><i class="text-danger asterik">*</i>
                                     <input type="datetime-local" class="form-control" name="registered_datetime" value="<?php echo $res[0]['registered_datetime']; ?>">
                                 </div>
+                        </div>
+                        <br>
+                        <div class="row">
+					  	  <div class="form-group">
+                               <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Min Withdrawal</label> <i class="text-danger asterik">*</i><?php echo isset($error['min_withdrawal']) ? $error['min_withdrawal'] : ''; ?>
+                                    <input type="number" class="form-control" name="min_withdrawal" value="<?php echo $res[0]['min_withdrawal']; ?>">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Total Withdrawal</label> <i class="text-danger asterik">*</i><?php echo isset($error['total_withdrawal']) ? $error['total_withdrawal'] : ''; ?>
+                                    <input type="number" class="form-control" name="total_withdrawal" value="<?php echo $res[0]['total_withdrawal']; ?>">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Balance</label> <i class="text-danger asterik">*</i><?php echo isset($error['balance']) ? $error['balance'] : ''; ?>
+                                    <input type="number" class="form-control" name="balance" value="<?php echo $res[0]['balance']; ?>">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="exampleInputEmail1">Total Earnings</label> <i class="text-danger asterik">*</i><?php echo isset($error['total_earnings']) ? $error['total_earnings'] : ''; ?>
+                                    <input type="number" class="form-control" name="total_earnings" value="<?php echo $res[0]['total_earnings']; ?>">
+                                </div>
+                            </div>
+                         </div>
+                        <br>
+                        <div class="row">
+                            <div class="form-group">
+                            <div class='col-md-6'>
+                                    <label for="exampleInputEmail1">Account Number</label> <i class="text-danger asterik">*</i>
+                                    <input type="number" class="form-control" name="account_num" value="<?php echo $res[0]['account_num']; ?>">
+                                </div>
+                                <div class='col-md-6'>
+                                    <label for="exampleInputEmail1">Holder Name</label> <i class="text-danger asterik">*</i>
+                                    <input type="text" class="form-control" name="holder_name" value="<?php echo $res[0]['holder_name']; ?>">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="form-group">
+                            <div class="col-md-4">
+                                    <label for="exampleInputEmail1">IFSC</label><i class="text-danger asterik">*</i>
+                                    <input type="text" class="form-control" name="ifsc" value="<?php echo $res[0]['ifsc']; ?>">
+                                </div>
+                                <div class="col-md-4">
+                                <label for="exampleInputEmail1">Bank</label><i class="text-danger asterik">*</i>
+                                    <input type="text" class="form-control" name="bank" value="<?php echo $res[0]['bank']; ?>">
+                                </div>
+                                <div class="col-md-4">
+                                <label for="exampleInputEmail1">Branch</label><i class="text-danger asterik">*</i>
+                                    <input type="text" class="form-control" name="branch" value="<?php echo $res[0]['branch']; ?>">
+                                </div>
+                            </div>
                         </div>
                         <br>
                         <div class="box-footer">
