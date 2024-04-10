@@ -57,9 +57,9 @@ if (isset($_POST['btnPaid'])  && isset($_POST['enable'])) {
                                         <div class="form-group col-md-3">
                                             <a href="export-unpaid-withdrawal.php" class="btn btn-primary"><i class="fa fa-download"></i> Export unpaid Withdrawal</a>
                                         </div>                  
-                                        <div class="form-group col-md-3">
+                                       <!-- <div class="form-group col-md-3">
                                             <a href="export-customers.php" class="btn btn-primary"><i class="fa fa-download"></i> Export Customers</a>
-                                        </div> 
+                                        </div> -->
                                 </div>
                         </div>
                             <div  class="box-body table-responsive">
@@ -96,7 +96,6 @@ if (isset($_POST['btnPaid'])  && isset($_POST['enable'])) {
                                                 <th  data-field="id" data-sortable="true">ID</th>
                                                 <th data-field="status" data-sortable="true">Status</th>
                                                 <th data-field="name" data-sortable="true">Name</th>
-                                                <th data-field="mobile" data-sortable="true">Mobile</th>
                                                 <th  data-field="amount" data-sortable="true">Amount</th>
                                                 <th  data-field="datetime" data-sortable="true">Date</th>
                                                 <th data-field="account_num" data-sortable="true">Account Number</th>

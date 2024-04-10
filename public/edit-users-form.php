@@ -27,6 +27,8 @@ if (isset($_POST['btnEdit'])) {
     $bank = $db->escapeString(($_POST['bank']));
     $branch = $db->escapeString(($_POST['branch']));
     $ifsc = $db->escapeString(($_POST['ifsc']));
+    $today_income = $db->escapeString(($_POST['today_income']));
+    $total_income = $db->escapeString(($_POST['total_income']));
     $registered_datetime= $db->escapeString($_POST['registered_datetime']);
 
     $error = array();
@@ -38,7 +40,7 @@ if (isset($_POST['btnEdit'])) {
         $error['email'] = " <span class='label label-danger'>Required!</span>";
     }
    
-    $sql_query = "UPDATE users SET name='$name',email='$email',registered_datetime='$registered_datetime',total_earnings='$total_earnings',balance='$balance',total_withdrawal='$total_withdrawal',min_withdrawal='$min_withdrawal',account_num='$account_num', holder_name='$holder_name', bank='$bank', branch='$branch', ifsc='$ifsc' WHERE id =  $ID";
+    $sql_query = "UPDATE users SET name='$name',email='$email',registered_datetime='$registered_datetime',total_earnings='$total_earnings',balance='$balance',total_withdrawal='$total_withdrawal',min_withdrawal='$min_withdrawal',account_num='$account_num', holder_name='$holder_name', bank='$bank', branch='$branch', ifsc='$ifsc',today_income = '$today_income',total_income = '$total_income' WHERE id =  $ID";
     $db->sql($sql_query);
     $result = $db->getResult();             
     if (!empty($result)) {
@@ -167,6 +169,19 @@ if (isset($_POST['btnCancel'])) { ?>
                                 </div>
                             </div>
                          </div>
+                        <br>
+                        <div class="row">
+                            <div class="form-group">
+                            <div class='col-md-3'>
+                                    <label for="exampleInputEmail1">Today Income</label> <i class="text-danger asterik">*</i>
+                                    <input type="number" class="form-control" name="today_income" value="<?php echo $res[0]['today_income']; ?>">
+                                </div>
+                                <div class='col-md-3'>
+                                    <label for="exampleInputEmail1">Total Income</label> <i class="text-danger asterik">*</i>
+                                    <input type="number" class="form-control" name="total_income" value="<?php echo $res[0]['total_income']; ?>">
+                                </div>
+                            </div>
+                        </div>
                         <br>
                         <div class="row">
                             <div class="form-group">

@@ -24,6 +24,15 @@
                                     <th  data-field="name" data-sortable="true">Name</th>
                                     <th  data-field="email" data-sortable="true">Email</th>
                                     <th data-field="registered_datetime" data-sortable="true">Registered Datetime</th>
+                                    <th  data-field="balance" data-sortable="true">Balance</th>
+                                    <th  data-field="total_income" data-sortable="true">Total Income</th>
+                                    <th data-field="today_income" data-sortable="true">Today Income</th>
+                                    <th  data-field="account_num" data-sortable="true">Account Number</th>
+                                    <th  data-field="holder_name" data-sortable="true">Holder Name</th>
+                                    <th  data-field="bank" data-sortable="true">Bank</th>
+                                    <th data-field="branch" data-sortable="true">Branch</th>
+                                    <th  data-field="ifsc" data-sortable="true">IFSC</th>
+                                    <th  data-field="total_withdrawal" data-sortable="true">Total Withdrawals</th>
                                     <th data-field="profile">Profile</th>
                                 </tr>
                             </thead>

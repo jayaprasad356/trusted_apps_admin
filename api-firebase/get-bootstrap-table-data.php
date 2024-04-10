@@ -109,6 +109,15 @@ $db->connect();
                 } else {
                     $tempRow['profile'] = 'No profile';
                 }
+                $tempRow['today_income'] = $row['today_income'];
+                $tempRow['total_income'] = $row['total_income'];
+                $tempRow['balance'] = $row['balance'];
+                $tempRow['total_withdrawal'] = $row['total_withdrawal'];    
+                $tempRow['account_num'] = $row['account_num'];
+                $tempRow['holder_name'] = $row['holder_name'];
+                $tempRow['bank'] = $row['bank'];
+                $tempRow['branch'] = $row['branch'];
+                $tempRow['ifsc'] = $row['ifsc'];
                 $tempRow['operate'] = $operate;
                 $rows[] = $tempRow;
             }
@@ -208,7 +217,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawals') {
 
         if (isset($_GET['search']) && !empty($_GET['search'])) {
             $search = $db->escapeString($fn->xss_clean($_GET['search']));
-            $where .= "AND (u.mobile LIKE '%" . $search . "%' OR u.name LIKE '%" . $search . "%'  OR w.datetime LIKE '%" . $search . "%') ";
+            $where .= "AND (u.name LIKE '%" . $search . "%' OR u.name LIKE '%" . $search . "%'  OR w.datetime LIKE '%" . $search . "%') ";
         }
     if (isset($_GET['sort'])){
         $sort = $db->escapeString($_GET['sort']);
@@ -226,7 +235,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawals') {
     foreach ($res as $row)
         $total = $row['total'];
 
-    $sql = "SELECT w.id AS id,w.*,u.name,u.mobile,u.account_num,u.holder_name,u.bank,u.branch,u.ifsc,w.status AS status FROM `withdrawals` w,`users` u $join 
+    $sql = "SELECT w.id AS id,w.*,u.name,u.account_num,u.holder_name,u.bank,u.branch,u.ifsc,w.status AS status FROM `withdrawals` w,`users` u $join 
           $where ORDER BY $sort $order LIMIT $offset, $limit";
     $db->sql($sql);
     $res = $db->getResult();
@@ -242,7 +251,6 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawals') {
         $tempRow['column'] = $checkbox;
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
-        $tempRow['mobile'] = $row['mobile'];
         $tempRow['account_num'] = ','.$row['account_num'].',';
         $tempRow['holder_name'] = $row['holder_name'];
         $tempRow['bank'] = $row['bank'];
@@ -309,7 +317,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'transactions') {
 
         if (isset($_GET['search']) && !empty($_GET['search'])) {
             $search = $db->escapeString($fn->xss_clean($_GET['search']));
-            $where .= "AND (u.mobile LIKE '%" . $search . "%' OR u.name LIKE '%" . $search . "%') ";
+            $where .= "AND (u.name LIKE '%" . $search . "%' OR u.name LIKE '%" . $search . "%') ";
         }
         
     if (isset($_GET['sort'])) {
@@ -327,7 +335,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'transactions') {
     foreach ($res as $row)
         $total = $row['total'];
    
-     $sql = "SELECT l.id AS id,l.*,u.name,u.mobile  FROM `transactions` l " . $join . " ORDER BY $sort $order LIMIT $offset, $limit";
+     $sql = "SELECT l.id AS id,l.*,u.name  FROM `transactions` l " . $join . " ORDER BY $sort $order LIMIT $offset, $limit";
      $db->sql($sql);
      $res = $db->getResult();
 
@@ -339,7 +347,6 @@ if (isset($_GET['table']) && $_GET['table'] == 'transactions') {
         $tempRow = array();
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
-        $tempRow['mobile'] = $row['mobile'];
         $tempRow['type'] = $row['type'];
         $tempRow['amount'] = $row['amount'];
         $tempRow['ads'] = $row['ads'];

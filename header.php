@@ -183,6 +183,23 @@ $fn = new custom_functions;
                         <span>Ratings</span>
                     </a>
                 </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-money"></i>
+                        <span>Withdrawals</span>
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="withdrawals.php"><i class="fa fa-money"></i>Withdrawals</a></li>
+                        <li><a href="add-new-bulk-cancel.php"><i class="fa fa-money"></i>Bulk Cancel</a></li>
+                   </ul>
+                </li>
+                <li class="treeview">
+                    <a href="transaction.php">
+                        <i class="fa fa-credit-card"></i>
+                        <span>Transaction</span>
+                    </a>
+                </li>
                 </section>
             <!-- /.sidebar -->
         </aside>

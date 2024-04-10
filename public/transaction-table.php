@@ -42,7 +42,6 @@
                                     
                                     <th  data-field="id" data-sortable="true">ID</th>
                                     <th  data-field="name" data-sortable="true"> Name</th>
-                                    <th  data-field="mobile" data-sortable="true"> Mobile</th>
                                     <th  data-field="ads" data-sortable="true">Ads</th>
                                     <th  data-field="amount" data-sortable="true">Amount</th>
                                     <th  data-field="type" data-sortable="true">Type</th>
