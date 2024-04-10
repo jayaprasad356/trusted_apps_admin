@@ -57,6 +57,19 @@ if (empty($apps)) {
     return false;
 }
 
+$sql = "SELECT COUNT(*) AS count FROM transactions WHERE user_id = '$user_id' AND DATE(datetime) = '$date'";
+$db->sql($sql);
+$res_check_plan = $db->getResult();
+$user_num_times = $res_check_plan[0]['count'];
+
+$share_limit_per_day = 5;
+
+if ($user_num_times >= $share_limit_per_day) {
+    $response['success'] = false;
+    $response['message'] = "Today Share Limit Is Over";
+    print_r(json_encode($response));
+    return false;
+}
 
     $amount = 2;
     $sql = "UPDATE users SET balance = balance + $amount, today_income = today_income + $amount, total_income = total_income + $amount WHERE id = '$user_id'";
