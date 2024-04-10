@@ -30,6 +30,7 @@ if ($num >= 1) {
         $temp['user_ratings'] = $row['user_ratings'];
         $temp['user_comments'] = $row['user_comments']; 
         $temp['profile'] = $row['profile'];
+        $temp['app_id'] = $row['app_id'];
         $temp['app_name'] = $row['app_name'];
         $temp['app_ratings'] = $row['app_ratings'];
         $temp['app_logo'] = DOMAIN_URL . $row['app_logo'];
