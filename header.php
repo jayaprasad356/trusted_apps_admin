@@ -172,18 +172,6 @@ $fn = new custom_functions;
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="apps.php">
-                        <i class="fa fa-adn"></i>
-                        <span>Apps</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="ratings.php">
-                        <i class="fa fa-bar-chart"></i>
-                        <span>Ratings</span>
-                    </a>
-                </li>
-                <li class="treeview">
                     <a href="#">
                         <i class="fa fa-money"></i>
                         <span>Withdrawals</span>
@@ -198,6 +186,24 @@ $fn = new custom_functions;
                     <a href="transaction.php">
                         <i class="fa fa-credit-card"></i>
                         <span>Transaction</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="apps.php">
+                        <i class="fa fa-adn"></i>
+                        <span>Apps</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="ratings.php">
+                        <i class="fa fa-bar-chart"></i>
+                        <span>Ratings</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="share_apps.php">
+                        <i class="fa fa-share"></i>
+                        <span>Share Apps</span>
                     </a>
                 </li>
                 </section>

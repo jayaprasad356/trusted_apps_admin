@@ -94,7 +94,12 @@ if ($shared_apps_count == $total_apps_count) {
     $db->sql($sql);
 }
 
+$pending_apps_count = $total_apps_count - $shared_apps_count;
+
 $response['success'] = true;
+$response['total_apps_count'] = $total_apps_count;
+$response['shared_apps_count'] = $shared_apps_count;
+$response['pending_apps_count'] = $pending_apps_count;
 $response['message'] = "Shared Successfully";
 print_r(json_encode($response));
 ?>
