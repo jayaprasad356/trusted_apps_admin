@@ -30,16 +30,12 @@ if (empty($_POST['profile'])) {
     print_r(json_encode($response));
     return false;
 }
-if (empty($_POST['referred_by'])) {
-    $response['success'] = false;
-    $response['message'] = "Refer code is empty";
-    print_r(json_encode($response));
-    return false;
-}
+
+
 $name = $db->escapeString($_POST['name']);
 $email = $db->escapeString($_POST['email']);
 $profile = $db->escapeString($_POST['profile']);
-$referred_by = $db->escapeString($_POST['referred_by']);
+$referred_by = isset($_POST['referred_by']) ? $db->escapeString($_POST['referred_by']) : '';
 $datetime = date('Y-m-d H:i:s');
 
 $sql = "SELECT * FROM users WHERE email='$email'";
