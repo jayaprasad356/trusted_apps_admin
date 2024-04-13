@@ -30,16 +30,36 @@ if (empty($_POST['profile'])) {
     print_r(json_encode($response));
     return false;
 }
-
+if (empty($_POST['referred_by'])) {
+    $response['success'] = false;
+    $response['message'] = "Refer code is empty";
+    print_r(json_encode($response));
+    return false;
+}
 $name = $db->escapeString($_POST['name']);
 $email = $db->escapeString($_POST['email']);
 $profile = $db->escapeString($_POST['profile']);
+$referred_by = $db->escapeString($_POST['referred_by']);
 $datetime = date('Y-m-d H:i:s');
 
 $sql = "SELECT * FROM users WHERE email='$email'";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
+
+     function generateRandomString($length) {
+        // Define an array containing digits and alphabets
+        $characters = array_merge(range('A', 'Z'), range('a', 'z'), range(0, 9));
+    
+        // Shuffle the array to make the selection random
+        shuffle($characters);
+    
+        // Select random characters from the shuffled array
+        $random_string = implode('', array_slice($characters, 0, $length));
+    
+        return $random_string;
+    }
+    $refer_code = generateRandomString(6);
 
 if ($num >= 1) {
     $sql = "UPDATE users SET `name`='$name', `profile`='$profile',`registered_datetime`='$datetime' WHERE email='$email'";
@@ -54,7 +74,7 @@ if ($num >= 1) {
     $response['data'] = $res;
     print_r(json_encode($response));
 } else {
-    $sql = "INSERT INTO users (`name`, `email`, `profile`, `registered_datetime`) VALUES ('$name', '$email', '$profile', '$datetime')";
+    $sql = "INSERT INTO users (`name`, `email`, `profile`, `registered_datetime`,`referred_by`, `refer_code`) VALUES ('$name', '$email', '$profile', '$datetime', '$referred_by', '$refer_code')";
     $db->sql($sql);
     
     $sql = "SELECT * FROM users WHERE email = '$email'";
