@@ -58,7 +58,7 @@ $num = $db->numRows($res);
     $refer_code = generateRandomString(6);
 
 if ($num >= 1) {
-    $sql = "UPDATE users SET `name`='$name', `profile`='$profile',`registered_datetime`='$datetime' WHERE email='$email'";
+    $sql = "UPDATE users SET `name`='$name', `profile`='$profile',`registered_datetime`='$datetime', `refer_code`='$refer_code',`referred_by`='$referred_by' WHERE email='$email'";
     $db->sql($sql);
     
     $sql = "SELECT * FROM users WHERE email = '$email'";
