@@ -32,7 +32,7 @@ if (empty($user)) {
 }
 
 
-$sql = "SELECT * FROM plan";
+$sql = "SELECT * FROM plan ORDER BY price DESC";
 $db->sql($sql);
 $res= $db->getResult();
 $num = $db->numRows($res);
