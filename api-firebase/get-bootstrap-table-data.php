@@ -57,7 +57,7 @@ $db->connect();
             $sort = 'id';
             $order = 'DESC';
 
-          
+         
             if (isset($_GET['offset']))
                 $offset = $db->escapeString($_GET['offset']);
             if (isset($_GET['limit']))
@@ -66,10 +66,10 @@ $db->connect();
                 $sort = $db->escapeString($_GET['sort']);
             if (isset($_GET['order']))
                 $order = $db->escapeString($_GET['order']);
-
+        
                 if (isset($_GET['search']) && !empty($_GET['search'])) {
                     $search = $db->escapeString($_GET['search']);
-                    $where .= " AND (id LIKE '%$search%' OR name LIKE '%$search%' OR mobile LIKE '%$search%' OR email LIKE '%$search%' OR refer_code LIKE '%$search%')";
+                    $where .= " AND (id LIKE '%" . $search . "%' OR name LIKE '%" . $search . "%' OR refer_code LIKE '%" . $search . "%' OR email LIKE '%" . $search . "%')";
                 }
             if (isset($_GET['sort'])){
                 $sort = $db->escapeString($_GET['sort']);
