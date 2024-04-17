@@ -25,6 +25,8 @@
                                     <th  data-field="email" data-sortable="true">Email</th>
                                     <th data-field="registered_datetime" data-sortable="true">Registered Datetime</th>
                                     <th  data-field="balance" data-sortable="true">Balance</th>
+                                    <th  data-field="referred_by" data-sortable="true">Referred By</th>
+                                    <th  data-field="refer_code" data-sortable="true">Refer Code</th>
                                     <th  data-field="total_income" data-sortable="true">Total Income</th>
                                     <th data-field="today_income" data-sortable="true">Today Income</th>
                                     <th  data-field="account_num" data-sortable="true">Account Number</th>

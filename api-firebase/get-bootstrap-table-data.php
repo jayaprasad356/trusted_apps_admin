@@ -72,7 +72,7 @@ $db->connect();
         
                 if (isset($_GET['search']) && !empty($_GET['search'])) {
                     $search = $db->escapeString($_GET['search']);
-                    $where .= " AND (id LIKE '%" . $search . "%' OR name LIKE '%" . $search . "%' OR mobile LIKE '%" . $search . "%' OR email LIKE '%" . $search . "%')";
+                    $where .= " AND (id LIKE '%" . $search . "%' OR name LIKE '%" . $search . "%' OR mobile LIKE '%" . $search . "%' OR email LIKE '%" . $search . "%' OR refer_code LIKE '%" . $search . "%')";
                 }
             if (isset($_GET['sort'])){
                 $sort = $db->escapeString($_GET['sort']);
@@ -118,6 +118,8 @@ $db->connect();
                 $tempRow['bank'] = $row['bank'];
                 $tempRow['branch'] = $row['branch'];
                 $tempRow['ifsc'] = $row['ifsc'];
+                $tempRow['referred_by'] = $row['referred_by'];
+                $tempRow['refer_code'] = $row['refer_code'];
                 $tempRow['operate'] = $operate;
                 $rows[] = $tempRow;
             }
